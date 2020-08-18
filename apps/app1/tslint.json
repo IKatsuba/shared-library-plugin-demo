@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "sharedLibraryPluginDemo",
+      "app1",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "shared-library-plugin-demo",
+      "app1",
       "kebab-case"
     ]
   },

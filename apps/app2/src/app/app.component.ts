@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'shared-library-plugin-demo-root',
+  selector: 'app2-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
