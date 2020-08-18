@@ -94,29 +94,95 @@
         }
       }
     },
-    "app1-e2e": {
-      "root": "apps/app1-e2e",
-      "sourceRoot": "apps/app1-e2e/src",
+    "app2": {
       "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/app2",
+      "sourceRoot": "apps/app2/src",
+      "prefix": "shared-library-plugin-demo",
       "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "cypressConfig": "apps/app1-e2e/cypress.json",
-            "tsConfig": "apps/app1-e2e/tsconfig.e2e.json",
-            "devServerTarget": "app1:serve"
+            "outputPath": "dist/apps/app2",
+            "index": "apps/app2/src/index.html",
+            "main": "apps/app2/src/main.ts",
+            "polyfills": "apps/app2/src/polyfills.ts",
+            "tsConfig": "apps/app2/tsconfig.app.json",
+            "aot": true,
+            "assets": ["apps/app2/src/favicon.ico", "apps/app2/src/assets"],
+            "styles": ["apps/app2/src/styles.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "devServerTarget": "app1:serve:production"
+              "fileReplacements": [
+                {
+                  "replace": "apps/app2/src/environments/environment.ts",
+                  "with": "apps/app2/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "app2:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "app2:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "app2:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/app1-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/app1-e2e/**/*"]
+            "tsConfig": [
+              "apps/app2/tsconfig.app.json",
+              "apps/app2/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/app2/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/app2/jest.config.js",
+            "tsConfig": "apps/app2/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/app2/src/test-setup.ts"
           }
         }
       }

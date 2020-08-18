@@ -1,0 +1,20 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "sharedLibraryPluginDemo",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "shared-library-plugin-demo",
+      "kebab-case"
+    ]
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
+  }
+}
