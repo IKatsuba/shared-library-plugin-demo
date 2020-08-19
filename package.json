@@ -5,8 +5,10 @@
   "scripts": {
     "ng": "ng",
     "nx": "nx",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run target serve --parallel",
+    "target": "nx run-many --all --target",
+    "build": "nx build app1 --prod && nx build app2 --prod && npm run compress",
+    "compress": "gzipper compress ./dist",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
@@ -24,8 +26,7 @@
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
+    "help": "nx help"
   },
   "private": true,
   "dependencies": {
@@ -59,6 +60,7 @@
     "cypress": "^4.1.0",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
+    "gzipper": "^4.0.1",
     "jest": "25.2.3",
     "jest-preset-angular": "8.1.2",
     "prettier": "2.0.4",
