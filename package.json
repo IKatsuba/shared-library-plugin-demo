@@ -5,9 +5,9 @@
   "scripts": {
     "ng": "ng",
     "nx": "nx",
-    "start": "npm run target serve --parallel",
+    "start": "npm run target serve -- --parallel",
     "target": "nx run-many --all --target",
-    "build": "nx build app1 --prod && nx build app2 --prod && npm run compress",
+    "build": "nx build app1 --prod && nx build app2 --prod && nx build app3 --prod && npm run compress",
     "compress": "gzipper compress ./dist",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
@@ -26,7 +26,8 @@
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points"
   },
   "private": true,
   "dependencies": {
