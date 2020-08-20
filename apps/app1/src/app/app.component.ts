@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app1-root',
@@ -10,23 +11,31 @@ import { map, tap } from 'rxjs/operators';
 export class AppComponent {
   title = 'app1';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
-  runApp2() {
-    this.http.get('/child', { responseType: 'text' }).pipe(
-      map(html => new DOMParser().parseFromString(html, 'text/html')),
-      tap((doc: Document) => {
-        const base = doc.querySelector('base');
-        document.querySelector('base').href = base.href;
+  runApp(app: string) {
+    this.http
+      .get(`/${app}`, { responseType: 'text' })
+      .pipe(
+        map((html) => new DOMParser().parseFromString(html, 'text/html')),
+        tap((doc: Document) => {
+          const base = doc.querySelector('base');
+          this.document.querySelector('base').href = base.href;
 
-        Array.from(doc.querySelectorAll('script')).forEach((originalScript) => {
-          const script = document.createElement('script');
-          script.defer = true;
-          script.src = originalScript.src;
+          Array.from(doc.querySelectorAll('script')).forEach(
+            (originalScript) => {
+              const script = this.document.createElement('script');
+              script.defer = true;
+              script.src = originalScript.src;
 
-          document.body.appendChild(script);
+              this.document.body.appendChild(script);
+            }
+          );
         })
-      })
-    ).subscribe(console.log)
+      )
+      .subscribe();
   }
 }

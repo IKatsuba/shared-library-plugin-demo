@@ -1,6 +1,10 @@
 {
-    "/child": {
+    "/app2": {
       "target": "http://localhost:4100",
+      "secure": false
+    },
+    "/app3": {
+      "target": "http://localhost:4101",
       "secure": false
     }
   }
