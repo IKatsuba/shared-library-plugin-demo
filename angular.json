@@ -124,7 +124,7 @@
             "customWebpackConfig": {
               "path": "apps/app2/extra-webpack.config.js"
             },
-            "outputPath": "dist/apps/app1/child",
+            "outputPath": "dist/apps/app1/app2",
             "index": "apps/app2/src/index.html",
             "main": "apps/app2/src/main.ts",
             "polyfills": "apps/app2/src/polyfills.ts",
@@ -135,10 +135,11 @@
               "apps/app2/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "apps/app2/src/styles.scss"
             ],
             "scripts": [],
-            "baseHref": "/child/"
+            "baseHref": "/app2/"
           },
           "configurations": {
             "production": {
