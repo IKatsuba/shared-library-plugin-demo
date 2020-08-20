@@ -16,9 +16,9 @@ export class AppComponent {
     @Inject(DOCUMENT) private document: Document
   ) {}
 
-  runApp2() {
+  runApp(app: string) {
     this.http
-      .get('/child', { responseType: 'text' })
+      .get(`/${app}`, { responseType: 'text' })
       .pipe(
         map((html) => new DOMParser().parseFromString(html, 'text/html')),
         tap((doc: Document) => {
@@ -36,6 +36,6 @@ export class AppComponent {
           );
         })
       )
-      .subscribe(console.log);
+      .subscribe();
   }
 }

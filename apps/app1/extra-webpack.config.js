@@ -5,7 +5,7 @@ const {
 module.exports = {
   plugins: [
     new SharedLibraryWebpackPlugin({
-      libs: '@angular/**',
+      libs: ['@angular/**', 'zone.js/dist/zone'],
     }),
   ],
 };
