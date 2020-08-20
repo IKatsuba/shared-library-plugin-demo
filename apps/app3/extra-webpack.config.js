@@ -5,7 +5,16 @@ const {
 module.exports = {
   plugins: [
     new SharedLibraryWebpackPlugin({
-      libs: ['@angular/**', 'zone.js/dist/zone'],
+      libs: [
+        '@angular/core',
+        '@angular/common',
+        '@angular/common/http',
+        '@angular/platform-browser',
+        '@angular/platform-browser/animations',
+        '@angular/animations',
+        '@angular/animations/browser',
+        'zone.js/dist/zone',
+      ],
     }),
   ],
 };
