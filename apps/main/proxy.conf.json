@@ -1,0 +1,10 @@
+{
+  "/readme/static": {
+    "target": "http://localhost:4100",
+    "secure": false
+  },
+  "/code-of-conduct/static": {
+    "target": "http://localhost:4101",
+    "secure": false
+  }
+}

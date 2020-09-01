@@ -7,7 +7,7 @@
     "nx": "nx",
     "start": "npm run target serve -- --parallel",
     "target": "nx run-many --all --target",
-    "build": "nx build app1 --prod && nx build app2 --prod && nx build app3 --prod && npm run compress",
+    "build": "nx build main --prod && nx build readme --prod && nx build code-of-conduct --prod && npm run compress",
     "compress": "gzipper compress ./dist",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
@@ -27,9 +27,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "http": "ws -d dist/apps/app1 -p 3001",
-    "http2": "ws -d dist/apps/app1 -p 3002 --http2",
-    "serve": "concurrently npm:http npm:http2"
+    "http2": "ws -d dist/apps/main --spa index.html -p 3002 --http2",
+    "serve": "npm run http2"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +43,7 @@
     "@angular/platform-browser-dynamic": "^10.0.0",
     "@angular/router": "^10.0.0",
     "@nrwl/angular": "10.0.12",
+    "ngx-markdown": "^10.1.1",
     "rxjs": "~6.5.5",
     "zone.js": "^0.10.2"
   },
@@ -60,7 +60,6 @@
     "@types/jest": "25.1.4",
     "@types/node": "~8.9.4",
     "codelyzer": "~5.0.1",
-    "concurrently": "^5.3.0",
     "cypress": "^4.1.0",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",

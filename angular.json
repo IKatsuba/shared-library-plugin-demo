@@ -1,33 +1,36 @@
 {
   "version": 1,
   "projects": {
-    "app1": {
+    "main": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/app1",
-      "sourceRoot": "apps/app1/src",
+      "root": "apps/main",
+      "sourceRoot": "apps/main/src",
       "prefix": "shared-library-plugin-demo",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "apps/app1/extra-webpack.config.js"
+              "path": "apps/main/extra-webpack.config.js"
             },
-            "outputPath": "dist/apps/app1",
-            "index": "apps/app1/src/index.html",
-            "main": "apps/app1/src/main.ts",
-            "polyfills": "apps/app1/src/polyfills.ts",
-            "tsConfig": "apps/app1/tsconfig.app.json",
+            "outputPath": "dist/apps/main",
+            "index": "apps/main/src/index.html",
+            "main": "apps/main/src/main.ts",
+            "polyfills": "apps/main/src/polyfills.ts",
+            "tsConfig": "apps/main/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/app1/src/favicon.ico", "apps/app1/src/assets"],
+            "assets": [
+              "apps/main/src/favicon.ico",
+              "apps/main/src/assets"
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "apps/app1/src/styles.scss"
+              "apps/main/src/styles.scss"
             ],
             "scripts": []
           },
@@ -35,8 +38,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/app1/src/environments/environment.ts",
-                  "with": "apps/app1/src/environments/environment.prod.ts"
+                  "replace": "apps/main/src/environments/environment.ts",
+                  "with": "apps/main/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -65,79 +68,85 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "app1:build",
-            "proxyConfig": "apps/app1/proxy.conf.json"
+            "browserTarget": "main:build",
+            "proxyConfig": "apps/main/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app1:build:production"
+              "browserTarget": "main:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app1:build"
+            "browserTarget": "main:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/app1/tsconfig.app.json",
-              "apps/app1/tsconfig.spec.json"
+              "apps/main/tsconfig.app.json",
+              "apps/main/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/app1/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/main/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/app1/jest.config.js",
-            "tsConfig": "apps/app1/tsconfig.spec.json",
+            "jestConfig": "apps/main/jest.config.js",
+            "tsConfig": "apps/main/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "apps/app1/src/test-setup.ts"
+            "setupFile": "apps/main/src/test-setup.ts"
           }
         }
       }
     },
-    "app2": {
+    "readme": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/app2",
-      "sourceRoot": "apps/app2/src",
+      "root": "apps/readme",
+      "sourceRoot": "apps/readme/src",
       "prefix": "shared-library-plugin-demo",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "apps/app2/extra-webpack.config.js"
+              "path": "apps/readme/extra-webpack.config.js"
             },
-            "outputPath": "dist/apps/app1/app2",
-            "index": "apps/app2/src/index.html",
-            "main": "apps/app2/src/main.ts",
-            "polyfills": "apps/app2/src/polyfills.ts",
-            "tsConfig": "apps/app2/tsconfig.app.json",
+            "outputPath": "dist/apps/main/readme/static",
+            "index": "apps/readme/src/index.html",
+            "main": "apps/readme/src/main.ts",
+            "polyfills": "apps/readme/src/polyfills.ts",
+            "tsConfig": "apps/readme/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/app2/src/favicon.ico", "apps/app2/src/assets"],
+            "assets": [
+              "apps/readme/src/favicon.ico",
+              "apps/readme/src/assets"
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "apps/app2/src/styles.scss"
+              "apps/readme/src/styles.scss"
             ],
             "scripts": [],
-            "baseHref": "/app2/"
+            "baseHref": "/readme/static/"
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/app2/src/environments/environment.ts",
-                  "with": "apps/app2/src/environments/environment.prod.ts"
+                  "replace": "apps/readme/src/environments/environment.ts",
+                  "with": "apps/readme/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -166,76 +175,84 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "app2:build",
+            "browserTarget": "readme:build",
             "port": 4100
           },
           "configurations": {
             "production": {
-              "browserTarget": "app2:build:production"
+              "browserTarget": "readme:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app2:build"
+            "browserTarget": "readme:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/app2/tsconfig.app.json",
-              "apps/app2/tsconfig.spec.json"
+              "apps/readme/tsconfig.app.json",
+              "apps/readme/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/app2/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/readme/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/app2/jest.config.js",
-            "tsConfig": "apps/app2/tsconfig.spec.json",
+            "jestConfig": "apps/readme/jest.config.js",
+            "tsConfig": "apps/readme/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "apps/app2/src/test-setup.ts"
+            "setupFile": "apps/readme/src/test-setup.ts"
           }
         }
       }
     },
-    "app3": {
+    "code-of-conduct": {
       "projectType": "application",
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
         }
       },
-      "root": "apps/app3",
-      "sourceRoot": "apps/app3/src",
-      "prefix": "app3",
+      "root": "apps/code-of-conduct",
+      "sourceRoot": "apps/code-of-conduct/src",
+      "prefix": "code-of-conduct",
       "architect": {
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "apps/app3/extra-webpack.config.js"
+              "path": "apps/code-of-conduct/extra-webpack.config.js"
             },
-            "outputPath": "dist/apps/app1/app3",
-            "index": "apps/app3/src/index.html",
-            "main": "apps/app3/src/main.ts",
-            "polyfills": "apps/app3/src/polyfills.ts",
-            "tsConfig": "apps/app3/tsconfig.app.json",
+            "outputPath": "dist/apps/main/code-of-conduct/static",
+            "index": "apps/code-of-conduct/src/index.html",
+            "main": "apps/code-of-conduct/src/main.ts",
+            "polyfills": "apps/code-of-conduct/src/polyfills.ts",
+            "tsConfig": "apps/code-of-conduct/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/app3/src/favicon.ico", "apps/app3/src/assets"],
-            "styles": ["apps/app3/src/styles.scss"],
+            "assets": [
+              "apps/code-of-conduct/src/favicon.ico",
+              "apps/code-of-conduct/src/assets"
+            ],
+            "styles": [
+              "apps/code-of-conduct/src/styles.scss"
+            ],
             "scripts": [],
-            "baseHref": "/app3/"
+            "baseHref": "/code-of-conduct/static/"
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/app3/src/environments/environment.ts",
-                  "with": "apps/app3/src/environments/environment.prod.ts"
+                  "replace": "apps/code-of-conduct/src/environments/environment.ts",
+                  "with": "apps/code-of-conduct/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -264,38 +281,41 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "app3:build",
+            "browserTarget": "code-of-conduct:build",
             "port": 4101
           },
           "configurations": {
             "production": {
-              "browserTarget": "app3:build:production"
+              "browserTarget": "code-of-conduct:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app3:build"
+            "browserTarget": "code-of-conduct:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/app3/tsconfig.app.json",
-              "apps/app3/tsconfig.spec.json"
+              "apps/code-of-conduct/tsconfig.app.json",
+              "apps/code-of-conduct/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/app3/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/code-of-conduct/**/*"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/app3/jest.config.js",
-            "tsConfig": "apps/app3/tsconfig.spec.json",
+            "jestConfig": "apps/code-of-conduct/jest.config.js",
+            "tsConfig": "apps/code-of-conduct/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "apps/app3/src/test-setup.ts"
+            "setupFile": "apps/code-of-conduct/src/test-setup.ts"
           }
         }
       }
@@ -348,5 +368,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "app1"
+  "defaultProject": "main"
 }

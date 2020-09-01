@@ -22,13 +22,13 @@
     }
   },
   "projects": {
-    "app1": {
+    "main": {
       "tags": []
     },
-    "app2": {
+    "readme": {
       "tags": []
     },
-    "app3": {
+    "code-of-conduct": {
       "tags": []
     }
   }
