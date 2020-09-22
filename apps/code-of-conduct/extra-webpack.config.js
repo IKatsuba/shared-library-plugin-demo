@@ -4,18 +4,19 @@ const {
 
 module.exports = {
   output: {
-    jsonpFunction: 'codeOfConductWebpackJsonp'
+    jsonpFunction: 'codeOfConductWebpackJsonp',
   },
   plugins: [
     new SharedLibraryWebpackPlugin({
       libs: [
-        '@angular/core',
-        '@angular/common',
-        '@angular/common/http',
-        '@angular/platform-browser',
-        '@angular/platform-browser/animations',
-        '@angular/animations',
-        '@angular/animations/browser',
+        { name: '@angular/core', usedExports: [] },
+        { name: '@angular/common', usedExports: [] },
+        { name: '@angular/common/http', usedExports: [] },
+        { name: '@angular/platform-browser', usedExports: ['DomSanitizer'] },
+        { name: '@angular/platform-browser/animations', usedExports: [] },
+        { name: '@angular/animations', usedExports: [] },
+        { name: '@angular/animations/browser', usedExports: [] },
+        { pattern: '@angular/cdk/*', usedExports: [] },
         'zone.js/dist/zone',
       ],
     }),
