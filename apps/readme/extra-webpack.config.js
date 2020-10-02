@@ -16,7 +16,6 @@ module.exports = {
         { name: '@angular/platform-browser/animations', usedExports: [] },
         { name: '@angular/animations', usedExports: [] },
         { name: '@angular/animations/browser', usedExports: [] },
-        { pattern: '@angular/cdk/*', usedExports: [] },
         'zone.js/dist/zone',
       ],
     }),
