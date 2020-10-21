@@ -30,6 +30,8 @@ export type AppFactory = (
   container: HTMLElement
 ) => OperatorFunction<string, void>;
 
+const _alreadyLoadedApps = new Set<string>();
+
 export const APP_FACTORY = new InjectionToken<AppFactory>('App initialize', {
   providedIn: 'root',
   factory() {
@@ -56,17 +58,24 @@ export const APP_FACTORY = new InjectionToken<AppFactory>('App initialize', {
                   container.innerHTML = '';
                   container.appendChild(root);
 
-                  Array.from(doc.querySelectorAll('script')).forEach(
-                    (originalScript) => {
-                      const script = document.createElement('script');
-                      script.defer = true;
-                      script.src = originalScript.src;
+                  if (!_alreadyLoadedApps.has(app)) {
+                    Array.from(doc.querySelectorAll('script')).forEach(
+                      (originalScript) => {
+                        if (originalScript.src.includes('polyfills')) {
+                          return;
+                        }
 
-                      document.body.appendChild(script);
-                    }
-                  );
+                        const script = document.createElement('script');
+                        script.defer = true;
+                        script.src = originalScript.src;
+
+                        document.body.appendChild(script);
+                      }
+                    );
+                  }
                 }),
-                mapTo<any, void>(undefined)
+                mapTo<any, void>(undefined),
+                tap(() => _alreadyLoadedApps.add(app))
               )
           )
         );
