@@ -43,7 +43,7 @@
     "@angular/platform-browser-dynamic": "^10.0.0",
     "@angular/router": "^10.0.0",
     "@nrwl/angular": "10.0.12",
-    "ngx-markdown": "^10.1.1",
+    "ngx-markdown": "^21.1.0",
     "rxjs": "~6.5.5",
     "zone.js": "^0.10.2"
   },
